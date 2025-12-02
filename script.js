@@ -1,3 +1,4 @@
+iniciarApp();
 const mainApp = document.getElementById("main-app")
 const videoFondo = document.getElementById("video-fondo");
 const videoPadre = videoFondo.parentElement;
@@ -390,3 +391,56 @@ function actualizarFechaYHora() {
 }
 setInterval(actualizarFechaYHora, 1000);
 actualizarFechaYHora();
+
+async function iniciarApp() {
+    const preloader = document.getElementById('preloader');
+    const progressBar = document.getElementById('progress-bar');
+    const recursos = [];
+    temas.forEach(videoSrc => recursos.push({ type: 'video', src: videoSrc }));
+    menuData.forEach(cat => {
+        if (cat.img) recursos.push({ type: 'image', src: cat.img });
+        if (cat.items) {
+            cat.items.forEach(item => {
+                if (item.imagen) recursos.push({ type: 'image', src: item.imagen });
+            });
+        }
+    });
+
+    const cargarRecurso = (recurso) => {
+        return new Promise((resolve) => {
+            if (recurso.type === 'image') {
+                const img = new Image();
+                img.src = recurso.src;
+                img.onload = resolve;
+                img.onerror = resolve; // Dios no falles por favor
+            } else {
+                // Para videos, solo voy a precargar un poco de metadata
+                const video = document.createElement('video');
+                video.src = recurso.src;
+                video.onloadeddata = resolve;
+                video.onerror = resolve;
+            }
+        });
+    };
+
+    let cargados = 0;
+    const total = recursos.length;
+
+    const promesas = recursos.map(async (rec) => {
+        await cargarRecurso(rec);
+        cargados++;
+        const porcentaje = (cargados / total) * 100;
+        if (progressBar) progressBar.style.width = `${porcentaje}%`;
+    });
+
+    await Promise.all(promesas);
+
+    // Ocultar Preloader
+    setTimeout(() => {
+        preloader.classList.add('opacity-0'); // Desvanecer
+        setTimeout(() => {
+            preloader.style.display = 'none'; // Quitar del DOM
+            if (videoFondo) videoFondo.play().catch(e => console.log("Autoplay bloqueado hasta interacción"));
+        }, 1000); // Esperar a que termine la transición de opacidad
+    }, 500); // Un pequeño respiro al llegar al 100%
+}
