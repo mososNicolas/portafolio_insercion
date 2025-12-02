@@ -2,13 +2,9 @@ const mainApp = document.getElementById("main-app")
 const videoFondo = document.getElementById("video-fondo");
 const videoPadre = videoFondo.parentElement;
 const temas = [
-    // Video 1 (Azul) - Recortado a 6 segundos
+    // videos recortados para mejorar la carga
     "https://res.cloudinary.com/doquso70x/video/upload/f_auto,q_auto,w_1280,ac_none,so_0,eo_6/v1764637892/video1_g2zkfc.mp4", 
-    
-    // Video 2 (Rojo)
     "https://res.cloudinary.com/doquso70x/video/upload/f_auto,q_auto,w_1280,ac_none,so_0,eo_6/v1764637896/video2_fgccwe.mp4", 
-    
-    // Video 3 (Negro)
     "https://res.cloudinary.com/doquso70x/video/upload/f_auto,q_auto,w_1280,ac_none,so_0,eo_6/v1764637901/video3_asaqqu.mp4"
 ];
 const menuData = [
