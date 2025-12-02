@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="style.css" />
+    <title>Portafolio - Insercion a la vida universitaria</title>
+  </head>
+  <body>
+    <section class="relative h-screen w-screen text-white text-3xl overflow-hidden">
+      
+      <div class="absolute inset-0 z-0">
+        <video autoplay muted loop class="w-full h-full object-cover">
+          <source id="video-fondo" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 bg-black/30"></div>
+      </div>
+
+      <div class="relative z-10 flex flex-col h-full w-full">
+        
+        <header class="flex flex-row justify-end align-top text-end m-4 text-white font-newrodin">
+          <div id="container-fecha"></div>
+          <img src="./src/carga.png" alt="Carga" class="w-16 h-10 ml-4 object-contain"/>
+        </header>  
+        
+        <nav class="mt-16 lg:mt-10" id="main-app"></nav> 
+
+        <div id="info-panel" class="
+            custom-scroll
+            fixed z-50 p-6 bg-black/80 backdrop-blur-md text-white hidden transition-all duration-500 opacity-0
+            bottom-0 left-0 w-full h-[45vh] rounded-t-3xl border-t-4 border-white overflow-y-auto
+            lg:top-[35vh] lg:bottom-auto lg:left-auto lg:right-16 lg:w-[40vw] lg:h-[auto] lg:max-h-[60vh] lg:rounded-xl lg:border-t-0 lg:border-l-4
+            ">
+            <h3 id="info-title" class="text-3xl lg:text-4xl font-bold mb-2 font-newrodin drop-shadow-lg"></h3>
+            <span id="info-date" class="text-sm text-blue-300 uppercase tracking-widest mb-4 block font-newrodin"></span>
+            <p id="info-text" class="text-base lg:text-lg leading-relaxed text-gray-100 font-light font-newrodin"></p>
+            <img id="info-image" src="" alt="Preview" class="w-full h-100 object-fill rounded-lg mb-4 pt-4 shadow-lg hidden">
+        </div>
+
+      </div>
+    </section>
+  </body>
+  <script src="script.js"></script>
+</html>
